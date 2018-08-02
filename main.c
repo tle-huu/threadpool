@@ -20,7 +20,7 @@ void task2(){
 int main(){
 
 	puts("Making threadpool with 4 threads");
-	t_thpool *thpool = thpool_init(6);
+	t_thpool *thpool = thpool_init(100);
 
 	puts("Adding 40 tasks to threadpool");
 	int i;

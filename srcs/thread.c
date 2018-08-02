@@ -58,7 +58,6 @@ void		*thread_work(t_thread *thread)
 			pthread_mutex_unlock(&(pool->num_lock));
 			if ((job = jobqueue_pop(&(pool->jobqueue))))
 			{
-				printf("ici %d\n", thread->id);
 				job->function(job->arg);
 				free(job);
 			}

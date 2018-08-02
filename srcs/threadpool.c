@@ -65,10 +65,7 @@ int			thpool_destroy(t_thpool *thpool)
 	/* Wait for thread to die */
 	sleep(1);
 	for (int i = 0; thpool->threads[i]; i++)
-	{
-		printf("i : %d\n", i);
 		thread_destroy(thpool->threads[i]);
-	}
 	printf("Len : %d\n", thpool->jobqueue.len);
 	jobqueue_destroy(&thpool->jobqueue);
 	// free(thpool->threads);
