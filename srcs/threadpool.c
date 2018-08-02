@@ -41,14 +41,17 @@ t_thpool	*thpool_init(int num_threads)
 	}
 
 	/*	Initialise threads */
+	printf("num thrad : %d\n", num_threads);
 	for (int i = 0; i < num_threads; i++)
 	{
 		thread_init(thpool, i);
-		printf("Created threads %d\n", i);
+		printf("\033[35;1m Created threads %d \033[0m\n", i);
 	}
 	/* Wait for threads to initialize */
-	while (thpool->num_alive != num_threads) {printf("debug init wait\n");}
+	while (thpool->num_alive != num_threads) {printf("debug init threads wait\n");}
 	// printf("Thpool_init(): OK\n");
+	printf("\033[36;1m MAIN THREAD INITIALIZED POOL \033[0m\n");
+
 	return (thpool);
 }
 
@@ -63,7 +66,8 @@ int			thpool_destroy(t_thpool *thpool)
 	thpool->alive = 0;
     //
 	/* Wait for thread to die */
-	sleep(1);
+	// while (thpool->num_alive) {}
+
 	for (int i = 0; thpool->threads[i]; i++)
 		thread_destroy(thpool->threads[i]);
 	printf("Len : %d\n", thpool->jobqueue.len);

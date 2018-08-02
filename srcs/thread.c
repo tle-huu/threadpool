@@ -20,7 +20,7 @@ void		thread_init(t_thpool *thpool, int i)
 
 void		thread_destroy(t_thread *thread)
 {
-	// free(thread);
+	free(thread);
 }
 
 void		*thread_work(t_thread *thread)

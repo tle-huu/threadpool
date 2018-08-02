@@ -14,9 +14,10 @@ int			jobqueue_init(t_jobqueue *jobqueue)
 
 int			jobqueue_push(t_jobqueue *jobqueue, t_job *job)
 {
-	// printf("\033[32;1m Start of push \033[0m ");
+	static int debug = 0;
+	printf("\033[32;1m Start of push %d \033[0m\n", debug);
 	pthread_mutex_lock(&(jobqueue->rwmutex));
-	// printf("\033[34;1m push lock push\033[0m ");
+	printf("\033[33;1m push lock push %d\033[0m \n", debug);
 	job->next_job = NULL;
 	if (!jobqueue || !job)
 	{
@@ -37,7 +38,7 @@ int			jobqueue_push(t_jobqueue *jobqueue, t_job *job)
 	bsem_signal(&(jobqueue->job_available));
 	// printf("push unlock mutex\n");
 	pthread_mutex_unlock(&(jobqueue->rwmutex));
-	// printf("end of push\n");
+	printf("\033[38;1m END of push %d \033[0m\n", debug++);
 	return (1);
 }
 
@@ -53,7 +54,10 @@ t_job		*jobqueue_pop(t_jobqueue *jobqueue)
 	}
 	job = jobqueue->head;
 	if (!job)
+	{
+		pthread_mutex_unlock(&(jobqueue->rwmutex));
 		return (job);
+	}
 	if (jobqueue->len == 1)
 	{
 		jobqueue->head = NULL;
