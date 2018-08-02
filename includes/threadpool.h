@@ -7,6 +7,7 @@
 # include <unistd.h>
 # include <strings.h>
 
+
 typedef struct		s_bsem
 {
 	pthread_mutex_t		mutex;

@@ -72,7 +72,7 @@ int			thpool_destroy(t_thpool *thpool)
 		thread_destroy(thpool->threads[i]);
 	printf("Len : %d\n", thpool->jobqueue.len);
 	jobqueue_destroy(&thpool->jobqueue);
-	// free(thpool->threads);
+	free(thpool->threads);
 	// free(thpool);
 	return (1);
 }
